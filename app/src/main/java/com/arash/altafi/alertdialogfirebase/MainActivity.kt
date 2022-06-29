@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             remoteConfig?.setDefaultsAsync(defaultsRate)
 
             remoteConfig?.fetchAndActivate()?.addOnCompleteListener { task ->
+                Log.i("test123321", "task = $task")
                 if (task.isSuccessful) {
                     val newVersionCode: String = remoteConfig?.getString("new_version_code").toString()
                     if (newVersionCode.toInt() > getVersionCode()) showTheDialog("com.facebook.lite", newVersionCode)
@@ -74,7 +75,6 @@ class MainActivity : AppCompatActivity() {
 
     private var pInfo: PackageInfo? = null
     private fun getVersionCode(): Int {
-        pInfo = null
         try {
             pInfo = packageManager.getPackageInfo(packageName, 0)
         } catch (e: PackageManager.NameNotFoundException) {
